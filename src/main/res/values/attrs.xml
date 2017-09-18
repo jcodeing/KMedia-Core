@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2017 K Sun <jcodeing@gmail.com>
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+  <!--=========@AControlGroupView@=========-->
+  <attr format="boolean" name="use_gesture_detector"/>
+  <declare-styleable name="AControlGroupView">
+    <attr format="integer" name="show_timeout"/>
+    <attr format="integer" name="rewind_increment"/>
+    <attr format="integer" name="fast_forward_increment"/>
+    <attr format="reference" name="default_control_layer_id"/>
+    <attr name="use_gesture_detector"/>
+  </declare-styleable>
+
+  <!--=========@AControlLayerView@=========-->
+  <declare-styleable name="AControlLayerView">
+    <attr format="reference" name="control_layer_layout_id"/>
+    <!--=========@Part-->
+    <!--=====@Interaction Area-->
+    <attr format="boolean" name="interaction_area_always_visible"/>
+    <attr format="boolean" name="use_part_top"/>
+    <attr format="boolean" name="use_part_bottom"/>
+    <attr format="boolean" name="use_part_left"/>
+    <attr format="boolean" name="use_part_right"/>
+    <attr format="boolean" name="use_part_middle"/>
+    <attr format="boolean" name="use_part_view_animation"/>
+    <attr format="dimension" name="part_top_min_height"/>
+    <attr format="dimension" name="part_bottom_min_height"/>
+    <!--=====@Other-->
+    <attr format="boolean" name="use_part_buffer"/>
+    <attr format="boolean" name="use_part_tips"/>
+  </declare-styleable>
+
+  <!--=========@AspectRatioView@=========-->
+  <!--Must be kept in sync with AspectRatioView-->
+  <attr format="enum" name="resize_mode">
+    <enum name="fit" value="0"/>
+    <enum name="fixed_width" value="1"/>
+    <enum name="fixed_height" value="2"/>
+    <enum name="fill" value="3"/>
+  </attr>
+  <declare-styleable name="AspectRatioView">
+    <attr name="resize_mode"/>
+  </declare-styleable>
+
+  <!--=========@APlayerView@=========-->
+  <!--Must be kept in sync with APlayerView-->
+  <attr format="enum" name="surface_type">
+    <enum name="none" value="0"/>
+    <enum name="surface_view" value="1"/>
+    <enum name="texture_view" value="2"/>
+  </attr>
+  <declare-styleable name="APlayerView">
+    <attr name="surface_type"/>
+    <attr format="reference" name="player_layout_id"/>
+    <attr format="boolean" name="use_control_group"/>
+    <!--Other-->
+    <attr name="resize_mode"/>
+    <attr name="android:layout_height"/>
+    <attr name="use_gesture_detector"/>
+  </declare-styleable>
+</resources>

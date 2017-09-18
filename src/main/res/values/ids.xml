@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2017 K Sun <jcodeing@gmail.com>
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+  <!--========================================================-->
+  <!--=========@Use prefix "k_" to avoid duplication@=========-->
+  <!--========================================================-->
+
+  <!--=========@Player@=========-->
+  <item name="k_player_view" type="id"/>
+  <item name="k_content_frame" type="id"/>
+  <item name="k_shutter" type="id"/>
+
+  <!--=========@Control@=========-->
+  <item name="k_ctrl_group" type="id"/>
+  <item name="k_ctrl_layer_port" type="id"/>
+  <item name="k_ctrl_layer_land" type="id"/>
+  <!--=========@Layer Part-->
+  <item name="k_ctrl_layer_part_top" type="id"/>
+  <item name="k_ctrl_layer_part_bottom" type="id"/>
+  <item name="k_ctrl_layer_part_left" type="id"/>
+  <item name="k_ctrl_layer_part_right" type="id"/>
+  <item name="k_ctrl_layer_part_middle" type="id"/>
+  <item name="k_ctrl_layer_part_buffer" type="id"/>
+  <item name="k_ctrl_layer_part_tips_tv" type="id"/>
+  <!--=========@Smart View-->
+  <item name="k_play" type="id"/>
+  <item name="k_pause" type="id"/>
+  <item name="k_prev" type="id"/>
+  <item name="k_next" type="id"/>
+  <item name="k_rew" type="id"/>
+  <item name="k_ffwd" type="id"/>
+  <item name="k_position_tv" type="id"/>
+  <item name="k_duration_tv" type="id"/>
+  <item name="k_progress_bar" type="id"/>
+  <item name="k_progress_any" type="id"/>
+  <!--=========@Extend-->
+  <item name="k_switch_control_layer" type="id"/>
+
+  <!--=========@Floating@=========-->
+  <item name="k_floating_view_close" type="id"/>
+  <item name="k_floating_view_drag_location" type="id"/>
+  <item name="k_floating_view_drag_size" type="id"/>
+</resources>

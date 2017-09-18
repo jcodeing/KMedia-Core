@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2017 K Sun <jcodeing@gmail.com>
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+  <!--=========@Media Button@=========-->
+  <style name="KMediaButton">
+    <item name="android:layout_width">24dp</item>
+    <item name="android:layout_height">24dp</item>
+    <item name="android:background">@null</item>
+  </style>
+  <!--=========@Play-->
+  <style name="KMediaButton.Play">
+    <item name="android:src">@drawable/k_ic_play</item>
+    <item name="android:contentDescription">@string/k_description_play</item>
+  </style>
+  <!--=========@Pause-->
+  <style name="KMediaButton.Pause">
+    <item name="android:src">@drawable/k_ic_pause</item>
+    <item name="android:contentDescription">@string/k_description_pause</item>
+  </style>
+  <!--=========@Previous-->
+  <style name="KMediaButton.Prev">
+    <item name="android:src">@drawable/k_ic_prev</item>
+    <item name="android:contentDescription">@string/k_description_prev</item>
+  </style>
+  <!--=========@Next-->
+  <style name="KMediaButton.Next">
+    <item name="android:src">@drawable/k_ic_next</item>
+    <item name="android:contentDescription">@string/k_description_next</item>
+  </style>
+  <!--=========@Rewind-->
+  <style name="KMediaButton.Rew">
+    <item name="android:src">@drawable/k_ic_rew</item>
+    <item name="android:contentDescription">@string/k_description_rew</item>
+  </style>
+  <!--=========@FastForward-->
+  <style name="KMediaButton.FFwd">
+    <item name="android:src">@drawable/k_ic_ffwd</item>
+    <item name="android:contentDescription">@string/k_description_ffwd</item>
+  </style>
+  <!--=========@Control Layer@=========-->
+  <style name="CtrlLayer">
+    <item name="android:tag">@string/k_ctrl_layer_tag</item>
+  </style>
+  <!--=========@Extend Button-->
+  <style name="CtrlLayer.ExtendButton">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_margin">3dp</item>
+    <item name="android:background">@null</item>
+    <item name="android:visibility">gone</item>
+  </style>
+</resources>

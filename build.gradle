@@ -41,3 +41,14 @@ repositories {
         name 'Google'
     }
 }
+
+// ============================@Publish@============================
+ext {
+    k_name = 'core'
+    k_desc = 'The KMedia framwork core module.'
+    k_version = ''
+    k_version_desc = ''
+    k_vcs_url = 'https://github.com/jcodeing/KMedia-Core.git'
+    k_web_site_url = 'https://github.com/jcodeing/KMedia-Core'
+}
+apply from: '../publish.gradle'

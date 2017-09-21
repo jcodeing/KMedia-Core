@@ -22,7 +22,7 @@ android {
         targetSdkVersion 25
         versionCode 1010
         versionName "1.0.10"
-    }
+    }// release 1.0.10
     buildTypes {
         release {
             minifyEnabled false

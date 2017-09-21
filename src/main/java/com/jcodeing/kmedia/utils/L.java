@@ -23,7 +23,7 @@ import android.util.Log;
  */
 public class L {
 
-  public static boolean ENABLE = true;
+  public static boolean ENABLE = false;
   public static int DEFAULT_PRINT_STACK_TRACE_METHOD_COUNT = 9;
 
   // ============================@TAG@============================

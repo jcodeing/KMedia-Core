@@ -22,6 +22,7 @@ android {
         targetSdkVersion 25
         versionCode 1010
         versionName "1.0.10"
+        vectorDrawables.useSupportLibrary = true
     }// release 1.0.10
     buildTypes {
         release {

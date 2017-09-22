@@ -15,12 +15,14 @@
  */
 package com.jcodeing.kmedia;
 
+import android.Manifest.permission;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.IBinder;
+import android.support.annotation.RequiresPermission;
 import android.view.SurfaceView;
 import android.view.TextureView;
 import com.jcodeing.kmedia.assist.AudioMgrHelper;
@@ -425,6 +427,7 @@ public abstract class APlayerBinding<P extends APlayerBinding> implements IPlaye
     return null;
   }
 
+  @RequiresPermission(permission.WAKE_LOCK)
   @Override
   public P setEnabledWifiLock(boolean enabled) {
     if (mBound) {

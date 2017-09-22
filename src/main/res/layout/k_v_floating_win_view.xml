@@ -49,7 +49,7 @@
             android:padding="3dp"
             android:background="@color/k_bg_common"
             android:contentDescription="@string/k_description_close"
-            android:src="@drawable/k_ic_close"/>
+            app:srcCompat="@drawable/k_ic_close"/>
           <!--=========@Play/Pause-->
           <FrameLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
               android:padding="3dp"
               android:background="@null"
               android:contentDescription="@string/k_description_play"
-              android:src="@drawable/k_ic_play"/>
+              app:srcCompat="@drawable/k_ic_play"/>
             <ImageButton
               android:id="@id/k_pause"
               android:layout_width="match_parent"
@@ -71,7 +71,7 @@
               android:padding="3dp"
               android:background="@null"
               android:contentDescription="@string/k_description_pause"
-              android:src="@drawable/k_ic_pause"
+              app:srcCompat="@drawable/k_ic_pause"
               android:visibility="gone"/>
           </FrameLayout>
         </LinearLayout>

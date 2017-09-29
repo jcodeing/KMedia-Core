@@ -76,8 +76,7 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
    * @see #supportBaseOnContextOfFunctionModule(Context)
    */
   public APlayer() {
-    //Not param constructor
-  }
+  }//Not param constructor
 
   /**
    * Default support, base on context of function Module.

@@ -23,6 +23,9 @@ import android.support.annotation.NonNull;
  */
 public final class Player extends APlayer<Player> {
 
+  public Player() {
+  }//Not param constructor
+
   public Player(@NonNull Context context) {
     super(context);
   }

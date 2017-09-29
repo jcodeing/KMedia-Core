@@ -16,6 +16,8 @@
 package com.jcodeing.kmedia;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.jcodeing.kmedia.service.PlayerService;
 
 /**
@@ -23,14 +25,14 @@ import com.jcodeing.kmedia.service.PlayerService;
  */
 public final class PlayerBinding extends APlayerBinding<PlayerBinding> {
 
-  public <PService extends PlayerService> PlayerBinding(Context context,
-      Class<PService> playerServiceClass, BindPlayer bindPlayer) {
+  public <PService extends PlayerService> PlayerBinding(@NonNull Context context,
+      @NonNull Class<PService> playerServiceClass, @Nullable BindPlayer bindPlayer) {
     super(context, playerServiceClass, bindPlayer);
   }
 
-  public <PService extends PlayerService> PlayerBinding(Context context,
-      Class<PService> playerServiceClass, BindPlayer bindPlayer,
-      BindingListener serviceConnected) {
+  public <PService extends PlayerService> PlayerBinding(@NonNull Context context,
+      @NonNull Class<PService> playerServiceClass, @Nullable BindPlayer bindPlayer,
+      @Nullable BindingListener serviceConnected) {
     super(context, playerServiceClass, bindPlayer, serviceConnected);
   }
 

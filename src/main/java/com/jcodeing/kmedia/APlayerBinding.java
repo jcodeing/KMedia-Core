@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.view.SurfaceView;
 import android.view.TextureView;
@@ -79,7 +81,7 @@ public abstract class APlayerBinding<P extends APlayerBinding> implements IPlaye
         mService = binder.getService();
         // =====@Bind Player
         if (!binder.isBoundPlayer()) {
-          binder.bindPlayer(mBindPlayer.onBindPlayer());
+          binder.bindPlayer(onBindPlayer());
         }
         // =====@First Binding
         if (!binder.isFirstBinding()) {
@@ -102,7 +104,7 @@ public abstract class APlayerBinding<P extends APlayerBinding> implements IPlaye
     }
   };
 
-  private final BindPlayer mBindPlayer;
+  private BindPlayer mBindPlayer;
 
   public interface BindPlayer {
 
@@ -112,6 +114,16 @@ public abstract class APlayerBinding<P extends APlayerBinding> implements IPlaye
      * @return new Player(context).init(new ...MediaPlayer(context));
      */
     IPlayer onBindPlayer();
+  }
+
+  /**
+   * Don't use bindPlayer, need subClass override return IPlayer.
+   */
+  protected IPlayer onBindPlayer() {
+    if (mBindPlayer != null) {
+      return mBindPlayer.onBindPlayer();
+    }
+    return null;//subClass return IPlayer.
   }
 
   private BindingListener mBindingListener;
@@ -136,30 +148,33 @@ public abstract class APlayerBinding<P extends APlayerBinding> implements IPlaye
 
   /**
    * @param playerServiceClass *.class[extends PlayerService]
-   * @param bindPlayer new BindPlayer(){onBindPlayer()-> return Object[extends IPlayer]
+   * @param bindPlayer new BindPlayer(){onBindPlayer()-> return Object[extends IPlayer] <p />
+   * WARNING: if don't use bindPlayer, need subClass go override {@link #onBindPlayer()} return
+   * IPlayer.
    */
-  public <PService extends PlayerService> APlayerBinding(Context context,
-      Class<PService> playerServiceClass,
-      BindPlayer bindPlayer) {
+  public <PService extends PlayerService> APlayerBinding(@NonNull Context context,
+      @NonNull Class<PService> playerServiceClass, @Nullable BindPlayer bindPlayer) {
     mContext = context;
     mBindPlayer = bindPlayer;
-    // =========@Init@=========
     mIntent = new Intent(mContext, playerServiceClass);
-    // =========@Start
-    mContext.startService(mIntent);
-    // =========@Bind
-    mContext.bindService(mIntent, mConnection, Context.BIND_AUTO_CREATE);
   }
 
-  public <PService extends PlayerService> APlayerBinding(Context context,
-      Class<PService> playerServiceClass,
-      BindPlayer bindPlayer, BindingListener serviceConnected) {
+  public <PService extends PlayerService> APlayerBinding(@NonNull Context context,
+      @NonNull Class<PService> playerServiceClass, @Nullable BindPlayer bindPlayer,
+      @Nullable BindingListener serviceConnected) {
     this(context, playerServiceClass, bindPlayer);
     mBindingListener = serviceConnected;
   }
 
+  public P bind() {
+    // =========@Start
+    mContext.startService(mIntent);
+    // =========@Bind
+    mContext.bindService(mIntent, mConnection, Context.BIND_AUTO_CREATE);
+    return returnThis();
+  }
 
-  public void onDestroy() {
+  public void unbind() {
     try {
       mContext.stopService(mIntent);
       if (mBound) {

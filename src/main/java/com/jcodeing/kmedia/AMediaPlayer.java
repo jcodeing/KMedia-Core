@@ -56,6 +56,12 @@ public abstract class AMediaPlayer implements IMediaPlayer {
     return dataSource;
   }
 
+  // ============================@Control@============================
+  @Override
+  public void reset() {
+    dataSource = null;
+  }
+
   // ============================@Set/Get/Is@============================
   @Override
   public void setVolume(float volume) {
@@ -72,6 +78,11 @@ public abstract class AMediaPlayer implements IMediaPlayer {
   protected void setPlaybackState(int playbackState) {
     this.playbackState = playbackState;
     notifyOnStateChanged();
+  }
+
+  @Override
+  public boolean isPlayable() {
+    return getDataSource() != null;
   }
 
   // ============================@Listener@============================

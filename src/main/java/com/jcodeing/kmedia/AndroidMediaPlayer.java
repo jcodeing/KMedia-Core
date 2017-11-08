@@ -135,6 +135,7 @@ public class AndroidMediaPlayer extends AMediaPlayer implements
 
   @Override
   public void reset() {
+    super.reset();
     try {
       internalPlayer.reset();
     } catch (IllegalStateException e) {
@@ -288,15 +289,18 @@ public class AndroidMediaPlayer extends AMediaPlayer implements
 
   @Override
   public boolean isPlayable() {
-    int state = getPlaybackState();
-    switch (state) {
-      case STATE_IDLE:
-      case STATE_GOT_SOURCE:
-      case STATE_BUFFERING:
-        return false;
-      default:
-        return true;
+    if (super.isPlayable()) {
+      int state = getPlaybackState();
+      switch (state) {
+        case STATE_IDLE:
+        case STATE_GOT_SOURCE:
+        case STATE_BUFFERING:
+          return false;
+        default:
+          return true;
+      }
     }
+    return false;
   }
 
   @Override

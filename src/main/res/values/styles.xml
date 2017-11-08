@@ -16,39 +16,39 @@
 -->
 <resources>
   <!--=========@Media Button@=========-->
-  <style name="KMediaButton">
+  <style name="KMediaButton" parent="Widget.AppCompat.ImageButton">
     <item name="android:layout_width">24dp</item>
     <item name="android:layout_height">24dp</item>
     <item name="android:background">@null</item>
   </style>
   <!--=========@Play-->
   <style name="KMediaButton.Play">
-    <item name="android:src">@drawable/k_ic_play</item>
+    <item name="srcCompat">@drawable/k_ic_play</item>
     <item name="android:contentDescription">@string/k_description_play</item>
   </style>
   <!--=========@Pause-->
   <style name="KMediaButton.Pause">
-    <item name="android:src">@drawable/k_ic_pause</item>
+    <item name="srcCompat">@drawable/k_ic_pause</item>
     <item name="android:contentDescription">@string/k_description_pause</item>
   </style>
   <!--=========@Previous-->
   <style name="KMediaButton.Prev">
-    <item name="android:src">@drawable/k_ic_prev</item>
+    <item name="srcCompat">@drawable/k_ic_prev</item>
     <item name="android:contentDescription">@string/k_description_prev</item>
   </style>
   <!--=========@Next-->
   <style name="KMediaButton.Next">
-    <item name="android:src">@drawable/k_ic_next</item>
+    <item name="srcCompat">@drawable/k_ic_next</item>
     <item name="android:contentDescription">@string/k_description_next</item>
   </style>
   <!--=========@Rewind-->
   <style name="KMediaButton.Rew">
-    <item name="android:src">@drawable/k_ic_rew</item>
+    <item name="srcCompat">@drawable/k_ic_rew</item>
     <item name="android:contentDescription">@string/k_description_rew</item>
   </style>
   <!--=========@FastForward-->
   <style name="KMediaButton.FFwd">
-    <item name="android:src">@drawable/k_ic_ffwd</item>
+    <item name="srcCompat">@drawable/k_ic_ffwd</item>
     <item name="android:contentDescription">@string/k_description_ffwd</item>
   </style>
   <!--=========@Control Layer@=========-->

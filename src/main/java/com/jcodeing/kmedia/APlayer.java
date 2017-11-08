@@ -15,6 +15,7 @@
  */
 package com.jcodeing.kmedia;
 
+import android.Manifest.permission;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import android.os.Handler.Callback;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 import android.text.TextUtils;
 import android.view.SurfaceView;
 import android.view.TextureView;
@@ -1268,12 +1270,16 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
   //<uses-permission android:name="android.permission.WAKE_LOCK"/>
   protected WifiManager.WifiLock wifiLock;
 
+  @RequiresPermission(permission.WAKE_LOCK)
   @Override
   public P setEnabledWifiLock(boolean enabled) {
     if (enabled) {
       if (wifiLock == null && context != null) {
-        wifiLock = ((WifiManager) context.getSystemService(Context.WIFI_SERVICE))
-            .createWifiLock(WifiManager.WIFI_MODE_FULL, "k_media_lock");
+        WifiManager wm = (WifiManager) context.getApplicationContext()
+            .getSystemService(Context.WIFI_SERVICE);
+        if (wm != null) {
+          wifiLock = wm.createWifiLock(WifiManager.WIFI_MODE_FULL, "k_media_lock");
+        }
       } else if (wifiLock != null && !wifiLock.isHeld()) {
         wifiLock.acquire();
       }

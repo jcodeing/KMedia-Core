@@ -582,8 +582,8 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
     if ((loopReturnParam = positionUnitLoopProcessing(2)) == 1) {
       return C.CMD_RETURN_FORCED;//[position unit] loop is processing
     } else if (loopReturnParam == 2) {
-      onPositionUnitProgress(C.POSITION_UNSET, C.INDEX_UNSET,
-          C.STATE_PROGRESS_POS_UNIT_FINISH);//loop finish
+      onPositionUnitProgress(C.POSITION_UNSET, C.POSITION_UNSET,
+          C.INDEX_UNSET, C.STATE_PROGRESS_POS_UNIT_FINISH);//loop finish
     }
     // ======@AB
     if ((loopReturnParam = abLoopProcessing(2)) == 1) {
@@ -668,16 +668,17 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
     return play_progress_was_handled;
   }
 
-  protected void onPositionUnitProgress(long position, int posUnitIndex, int posUnitState) {
+  protected void onPositionUnitProgress(long position, long duration,
+      int posUnitIndex, int posUnitState) {
     for (Listener listener : listeners) {
-      listener.onPositionUnitProgress(position, posUnitIndex, posUnitState);
+      listener.onPositionUnitProgress(position, duration, posUnitIndex, posUnitState);
     }
     if (posUnitState == C.STATE_PROGRESS_POS_UNIT_END) {
       if (positionUnitLoopProcessing(1) == 2) {
         // =========@finish@=========
         for (Listener listener : listeners) {
-          listener.onPositionUnitProgress(position, posUnitIndex,
-              C.STATE_PROGRESS_POS_UNIT_FINISH);
+          listener.onPositionUnitProgress(position, duration,
+              posUnitIndex, C.STATE_PROGRESS_POS_UNIT_FINISH);
         }
       }
     }
@@ -826,8 +827,8 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
     } else {//Re/unset
       currentPosUnitIndex = C.INDEX_UNSET;
       if (posUnitList != null) {
-        onPositionUnitProgress(C.POSITION_UNSET, currentPosUnitIndex,
-            C.STATE_PROGRESS_POS_UNIT_START);
+        onPositionUnitProgress(C.POSITION_UNSET, C.POSITION_UNSET,
+            currentPosUnitIndex, C.STATE_PROGRESS_POS_UNIT_START);
       }
     }
   }
@@ -837,14 +838,17 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
    * @return whether someone was handled
    */
   protected boolean positionUnitProgress(long position) {
-    // ============================@PosUnit@============================
     if (posUnitListAvailable()) {
       // =========@End@=========
       if (isInPosUnit && currentPosUnitIndex >= 0 &&
           currentPosUnitIndex < posUnitList.positionUnitSize() &&
           posUnitList.getEndPosition(currentPosUnitIndex) <= position) {
         isInPosUnit = false;//[s~PosUnit~e]...
-        onPositionUnitProgress(position, currentPosUnitIndex, C.STATE_PROGRESS_POS_UNIT_END);
+        onPositionUnitProgress(position
+                - posUnitList.getStartPosition(currentPosUnitIndex),
+            posUnitList.getEndPosition(currentPosUnitIndex)
+                - posUnitList.getStartPosition(currentPosUnitIndex),
+            currentPosUnitIndex, C.STATE_PROGRESS_POS_UNIT_END);
         L.v(TAG, "Pos(" + position + ") PosUnitIndex(" + currentPosUnitIndex + ") End ...");
         return true;//(if condition 1End == 2Start, still return Avoid operating together)
       }
@@ -858,8 +862,22 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
           posUnitList.getStartPosition(posUnitIndexNext) <= position) {
         currentPosUnitIndex = posUnitIndexNext;
         isInPosUnit = true;//[s~PosUnit~e]
-        onPositionUnitProgress(position, currentPosUnitIndex, C.STATE_PROGRESS_POS_UNIT_START);
+        onPositionUnitProgress(position
+                - posUnitList.getStartPosition(currentPosUnitIndex),
+            posUnitList.getEndPosition(currentPosUnitIndex)
+                - posUnitList.getStartPosition(currentPosUnitIndex),
+            currentPosUnitIndex, C.STATE_PROGRESS_POS_UNIT_START);
         L.v(TAG, "Pos(" + position + ") PosUnitIndex(" + currentPosUnitIndex + ") Start ...");
+      }
+
+      // =========@Mid@=========
+      if (isInPosUnit && currentPosUnitIndex >= 0 &&
+          currentPosUnitIndex < posUnitList.positionUnitSize()) {
+        onPositionUnitProgress(position
+                - posUnitList.getStartPosition(currentPosUnitIndex),
+            posUnitList.getEndPosition(currentPosUnitIndex)
+                - posUnitList.getStartPosition(currentPosUnitIndex),
+            currentPosUnitIndex, C.STATE_PROGRESS_POS_UNIT_MID);
       }
       return true;
     }
@@ -1294,7 +1312,7 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
   // ============================@AudioFocus@============================
   protected AudioMgrHelper audioMgrHelper;
   private int currentAudioFocusState = AudioManager.AUDIOFOCUS_LOSS;
-  protected boolean enabledAudioFocusManage = true;
+  protected boolean enabledAudioFocusManage = false;
 
   @Override
   public P setEnabledAudioFocusManage(boolean enabled) {
@@ -1438,7 +1456,7 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
    * @param context Use for internal register/unregisterReceiver, getSystemService, ...
    */
   public void supportBaseOnContextOfFunctionModule(@NonNull Context context) {
-    this.context = context;
-    audioMgrHelper = AudioMgrHelper.i().init(context);
+    this.context = context;//↓ Default enabled
+    setEnabledAudioFocusManage(true).audioMgrHelper = AudioMgrHelper.i().init(context);
   }
 }

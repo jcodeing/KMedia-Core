@@ -327,20 +327,21 @@ public interface IPlayer<P extends IPlayer> extends IPlayerBase {
      * WARNING: use position|posUnitIndex in {@link C#STATE_PROGRESS_POS_UNIT_FINISH}, remember to
      * do the judgment(position>=0) | (posUnitIndex>=0)
      *
-     * @param position current play position
+     * @param position posUnit position (currentPosition - posUnitStartPosition)
+     * @param duration posUnit duration (posUnitEndPosition - posUnitStartPosition)
      * @param posUnitIndex current position unit index
      * @param posUnitState <ul> <li>{@link C#STATE_PROGRESS_POS_UNIT_START} <li>{@link
      * C#STATE_PROGRESS_POS_UNIT_MID} <li>{@link C#STATE_PROGRESS_POS_UNIT_END} <li>{@link
      * C#STATE_PROGRESS_POS_UNIT_FINISH} <ul/>
      * @see #setUpdatePlayProgressDelayMs(long)
      */
-    void onPositionUnitProgress(long position, int posUnitIndex, int posUnitState);
+    void onPositionUnitProgress(long position, long duration, int posUnitIndex, int posUnitState);
 
     /**
      * WARNING: use position,duration in {@link C#STATE_PROGRESS_AB_FINISH}, remember to do the
      * judgment(position>=0 && duration>position)
      *
-     * @param position current play ab position (position - abStartPosition)
+     * @param position ab position (currentPosition - abStartPosition)
      * @param duration ab duration (abEndPosition - abStartPosition)
      * @param abState <ul> <li>{@link C#STATE_PROGRESS_AB_START} <li>{@link C#STATE_PROGRESS_AB_MID}
      * <li>{@link C#STATE_PROGRESS_AB_END} <li>{@link C#STATE_PROGRESS_AB_FINISH} <ul/>

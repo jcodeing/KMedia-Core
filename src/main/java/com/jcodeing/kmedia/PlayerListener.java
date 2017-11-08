@@ -72,7 +72,8 @@ public class PlayerListener implements IPlayer.Listener {
   }
 
   @Override
-  public void onPositionUnitProgress(long position, int posUnitIndex, int posUnitState) {
+  public void onPositionUnitProgress(long position, long duration,
+      int posUnitIndex, int posUnitState) {
     //Do nothing
   }
 

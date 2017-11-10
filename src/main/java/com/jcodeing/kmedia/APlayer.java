@@ -576,6 +576,8 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
 
   @Override
   public int onCompletion() {
+    //completion update... [insure (duration <= position) deal]
+    updatePlayProgress(11);
     // =========@LoopProcessing
     int loopReturnParam;
     // ======@PositionUnit
@@ -761,8 +763,8 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
     long position = getCurrentPosition();
     long duration = getDuration();
     if (position >= 0) {
-      if (!positionUnitProgress(position) &//use "&"
-          !abProgress(position) &//use "&"
+      if (!positionUnitProgress(position, duration) &//use "&"
+          !abProgress(position, duration) &//use "&"
           !onPlayProgress(position, duration)) {//called two method
         //No one was handled
         return;
@@ -823,7 +825,7 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
       isInPosUnit = false;
       currentPosUnitIndex = posUnitIndex - 1;
       long startPos = posUnitList.getStartPosition(posUnitIndex);
-      positionUnitProgress(startPos);
+      positionUnitProgress(startPos, C.POSITION_UNSET);
     } else {//Re/unset
       currentPosUnitIndex = C.INDEX_UNSET;
       if (posUnitList != null) {
@@ -837,12 +839,14 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
    * @param position current play position
    * @return whether someone was handled
    */
-  protected boolean positionUnitProgress(long position) {
+  protected boolean positionUnitProgress(long position, long duration) {
     if (posUnitListAvailable()) {
       // =========@End@=========
       if (isInPosUnit && currentPosUnitIndex >= 0 &&
           currentPosUnitIndex < posUnitList.positionUnitSize() &&
-          posUnitList.getEndPosition(currentPosUnitIndex) <= position) {
+          (posUnitList.getEndPosition(currentPosUnitIndex) <= position ||
+              (duration <= position && duration > 0 && //last end position
+                  posUnitList.getEndPosition(currentPosUnitIndex) >= duration))) {
         isInPosUnit = false;//[s~PosUnit~e]...
         onPositionUnitProgress(position
                 - posUnitList.getStartPosition(currentPosUnitIndex),
@@ -1184,10 +1188,12 @@ public abstract class APlayer<P extends APlayer> implements IPlayer<P>, IPlayerB
    * @param position current play position
    * @return whether someone was handled
    */
-  protected boolean abProgress(long position) {
+  protected boolean abProgress(long position, long duration) {
     if (abEnabled) {
       // =========@End@=========
-      if (isInAB && abEndPosition <= position) {
+      if (isInAB && (abEndPosition <= position ||
+          (duration <= position && duration > 0 && //last end position
+              abEndPosition >= duration))) {
         isInAB = false;//[s~AB~e]...
         onABProgress(position - abStartPosition, abEndPosition - abStartPosition,
             C.STATE_PROGRESS_AB_END);

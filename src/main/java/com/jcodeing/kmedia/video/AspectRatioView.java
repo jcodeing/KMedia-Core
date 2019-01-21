@@ -17,9 +17,9 @@ package com.jcodeing.kmedia.video;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import androidx.annotation.IntDef;
 import com.jcodeing.kmedia.R;
 import com.jcodeing.kmedia.view.LocalFrameLayout;
 import java.lang.annotation.Retention;

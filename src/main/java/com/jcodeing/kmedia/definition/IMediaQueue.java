@@ -15,7 +15,7 @@
  */
 package com.jcodeing.kmedia.definition;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import com.jcodeing.kmedia.IPlayer;
 import com.jcodeing.kmedia.Player;
 import com.jcodeing.kmedia.assist.C;

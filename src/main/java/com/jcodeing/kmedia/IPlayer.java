@@ -18,7 +18,7 @@ package com.jcodeing.kmedia;
 import android.Manifest.permission;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 import com.jcodeing.kmedia.assist.AudioMgrHelper;
 import com.jcodeing.kmedia.assist.C;
 import com.jcodeing.kmedia.definition.IMediaItem;
@@ -124,7 +124,7 @@ public interface IPlayer<P extends IPlayer> extends IPlayerBase {
    * <li>{@link #setAB(long, long)} <li>{@link #setABLoop(int, int)} <li>{@link #setAB(long, long,
    * int, int)} <li>{@link #setEnabledPositionUnitLoop(boolean, int, int)} <li>{@link
    * Listener#onPlayProgress(long, long)} <li>{@link Listener#onABProgress(long, long, int)}
-   * <li>{@link Listener#onPositionUnitProgress(long, int, int)} <li>...... <ul/>
+   * <li>{@link Listener#onPositionUnitProgress(long, long, int, int)} <li>...... <ul/>
    *
    * @param updatePlayProgressDelayMs value>=0?value:default[1000 - (position % 1000)]
    */

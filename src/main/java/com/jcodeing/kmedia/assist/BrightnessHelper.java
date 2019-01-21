@@ -15,9 +15,9 @@
  */
 package com.jcodeing.kmedia.assist;
 
-import android.support.annotation.NonNull;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
+import androidx.annotation.NonNull;
 import com.jcodeing.kmedia.utils.Assert;
 
 public class BrightnessHelper {

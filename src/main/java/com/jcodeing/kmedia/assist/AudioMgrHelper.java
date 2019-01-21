@@ -18,7 +18,7 @@ package com.jcodeing.kmedia.assist;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import com.jcodeing.kmedia.utils.Assert;
 import com.jcodeing.kmedia.utils.L;
 
@@ -56,7 +56,12 @@ public class AudioMgrHelper {
   }
 
   public AudioMgrHelper init(@NonNull Context context) {
-    return init((AudioManager) context.getSystemService(Context.AUDIO_SERVICE));
+    AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    if (audioManager != null) {
+      return init(audioManager);
+    } else {
+      return null;
+    }
   }
 
   // ============================@AudioManager@============================

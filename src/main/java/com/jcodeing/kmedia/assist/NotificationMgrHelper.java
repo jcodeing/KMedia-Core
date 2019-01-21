@@ -20,10 +20,10 @@ import android.app.Notification.Builder;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.NotificationCompat;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 /**
  * Notification Manager Helper. <p /> Assist maintain android.app.NotificationManager.
